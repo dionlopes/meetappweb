@@ -25,10 +25,6 @@ export default function SignUp() {
     <>
       <img src={logo} alt="meetapp" />
 
-      <button id="voltar" type="button">
-        <Link to="/">Voltar</Link>
-      </button>
-
       <Form schema={schema} onSubmit={handleSubmit}>
         <Input name="name" placeholder="Nome completo" />
         <Input name="email" type="email" placeholder="Seu e-mail" />
