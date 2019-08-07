@@ -4,34 +4,24 @@ import PropTypes from 'prop-types';
 
 import AuthLayout from '~/pages/_layouts/auth';
 import DefaultLayout from '~/pages/_layouts/default';
-import PublicLayout from '~/pages/_layouts/public';
 
 export default function RouteWrapper({
   component: Component,
   isPrivate,
-  screenLoginRegister,
   ...rest
 }) {
 
   const signed = false;
 
   if (!signed && isPrivate) {
+    return <Redirect to="/login" />;
+  }
+
+  if (signed && !isPrivate) {
     return <Redirect to="/" />;
   }
 
-  if (signed && screenLoginRegister) {
-    return <Redirect to="/" />;
-  }
-
-  let Layout = screenLoginRegister ? AuthLayout : null;
-
-  if (!Layout && !isPrivate) {
-    Layout = signed ? DefaultLayout: AuthLayout;
-  }
-
-  if (!Layout && !isPrivate) {
-    Layout = PublicLayout;
-  }
+  const Layout = signed ? DefaultLayout : AuthLayout;
 
   return (
     <Route
@@ -44,3 +34,13 @@ export default function RouteWrapper({
     />
   )
 }
+
+RouteWrapper.propTypes = {
+  isPrivate: PropTypes.bool,
+  component: PropTypes.oneOfType([PropTypes.element, PropTypes.func])
+    .isRequired,
+};
+
+RouteWrapper.defaultProps = {
+  isPrivate: false,
+};
