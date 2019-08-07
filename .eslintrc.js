@@ -30,6 +30,7 @@ module.exports = {
     "import/prefer-default-export": "off",
     "no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
     "react/jsx-one-expression-per-line": "off",
+    "no-console": ["error", { allow: ["tron"] }],
   },
   settings: {
     "import/resolver": {
