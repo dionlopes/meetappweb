@@ -8,8 +8,8 @@ import PublicLayout from '~/pages/_layouts/public';
 
 export default function RouteWrapper({
   component: Component,
-  isPrivate = false,
-  screenLoginRegister = false,
+  isPrivate,
+  screenLoginRegister,
   ...rest
 }) {
 
