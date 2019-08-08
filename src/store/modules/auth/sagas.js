@@ -23,9 +23,34 @@ export function* signIn({ payload }) {
 
     history.push('/');
   } catch (error) {
-    toast.error('Falha na autenticação verifique seus dados');
+    toast.error('Falha na autenticação, verifique seus dados');
     yield put(signFailure());
   }
 }
 
-export default all([takeLatest('@auth/SIGN_IN_REQUEST', signIn)]);
+export function* signUp({ payload }) {
+  try {
+    const { name, email, password } = payload;
+
+    yield call(api.post, 'users', {
+      name,
+      email,
+      password,
+    });
+
+    history.push('/');
+  } catch (error) {
+    toast.error('Falha no cadastro, verifique seus dados');
+    yield put(signFailure());
+  }
+}
+
+export function signOut() {
+  history.push('/');
+}
+
+export default all([
+  takeLatest('@auth/SIGN_IN_REQUEST', signIn),
+  takeLatest('@auth/SIGN_UP_REQUEST', signUp),
+  takeLatest('@auth/SIGN_OUT', signOut),
+]);
