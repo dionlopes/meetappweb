@@ -37,7 +37,7 @@ export const Profile = styled.div`
   text-align: right;
 
   a {
-    margin-top: 2px;
+    margin-top: 5px;
     color: #999;
     font-size: 12px;
   }
