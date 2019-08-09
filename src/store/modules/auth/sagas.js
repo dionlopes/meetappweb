@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import history from '~/services/history';
 import api from '~/services/api';
 
-import { signInSuccess, signFailure } from './actions';
+import { signInSuccess, signUpSuccess, signFailure } from './actions';
 
 export function* signIn({ payload }) {
   const { email, password } = payload;
@@ -37,6 +37,8 @@ export function* signUp({ payload }) {
       email,
       password,
     });
+
+    yield put(signUpSuccess());
 
     history.push('/');
   } catch (error) {
