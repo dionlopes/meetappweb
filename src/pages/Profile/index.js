@@ -9,6 +9,7 @@ import { Container } from './styles';
 
 export default function Profile() {
   const profile = useSelector(state => state.user.profile);
+  const loading = useSelector(state => state.user.loading);
   const dispatch = useDispatch();
 
   function handleSubmit(data) {
@@ -35,8 +36,14 @@ export default function Profile() {
         />
 
         <button type="submit">
-          <MdAddCircleOutline size={20} />
-          Salvar perfil
+          {loading ? (
+            'Salvando...'
+          ) : (
+            <>
+              <MdAddCircleOutline size={20} />
+              Salvar perfil
+            </>
+          )}
         </button>
       </Form>
     </Container>
