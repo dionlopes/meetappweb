@@ -33,6 +33,29 @@ export function* newMeetup({ payload }) {
   }
 }
 
+export function* editMeetup({ payload }) {
+  console.tron.log(payload);
+  try {
+    const { id, file_id, title, description, date, location } = payload;
+
+    const newData = getTime(date) ? getTime(date) : getTime(parseISO(date));
+
+    const meetup = Object.assign(
+      { title, description, date: newData, location, file_id },
+      Number(file_id) || {}
+    );
+
+    yield call(api.put, `meetups/${id}`, meetup);
+
+    toast.success('Meetup editado com sucesso');
+    history.push('/');
+  } catch (error) {
+    toast.error(error);
+
+    toast.error('Falha ao atualizar, verifique seus dados!');
+  }
+}
+
 export function* deleteMeetup({ payload }) {
   try {
     const { id } = payload;
@@ -51,5 +74,6 @@ export function* deleteMeetup({ payload }) {
 export default all([
   takeLatest('@meetup/SHARE_MEETUP_REQUEST', meetUp),
   takeLatest('@meetup/NEW_MEETUP_REQUEST', newMeetup),
+  takeLatest('@meetup/EDIT_MEETUP_REQUEST', editMeetup),
   takeLatest('@meetup/DELETE_MEETUP_REQUEST', deleteMeetup),
 ]);

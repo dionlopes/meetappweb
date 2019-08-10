@@ -7,6 +7,7 @@ import SignIn from '~/pages/SignIn';
 import SignUp from '~/pages/SignUp';
 import Meetups from '~/pages/Meetups';
 import MeetupsNew from '~/pages/Meetups/New';
+import MeetupsEdit from '~/pages/Meetups/Edit';
 import Profile from '~/pages/Profile';
 
 export default function Routes() {
@@ -19,6 +20,7 @@ export default function Routes() {
 
       <Route path="/meetups" exact component={Meetups} isPrivate />
       <Route path="/meetups/new" component={MeetupsNew} isPrivate />
+      <Route path="/meetups/edit" component={MeetupsEdit} isPrivate />
 
       <Route path="/profile" component={Profile} isPrivate />
     </Switch>
