@@ -15,6 +15,24 @@ export function* meetUp({ payload }) {
   history.push('/meetups');
 }
 
+export function* newMeetup({ payload }) {
+  try {
+    const { file_id, title, description, date, location } = payload;
+
+    yield call(api.post, 'meetups', {
+      file_id,
+      title,
+      description,
+      date: getTime(date),
+      location,
+    });
+    toast.success('Meetup criado com sucesso');
+    history.push('/');
+  } catch (error) {
+    toast.error('Falha no cadastro, verifique seus dados!');
+  }
+}
+
 export function* deleteMeetup({ payload }) {
   try {
     const { id } = payload;
@@ -32,5 +50,6 @@ export function* deleteMeetup({ payload }) {
 
 export default all([
   takeLatest('@meetup/SHARE_MEETUP_REQUEST', meetUp),
+  takeLatest('@meetup/NEW_MEETUP_REQUEST', newMeetup),
   takeLatest('@meetup/DELETE_MEETUP_REQUEST', deleteMeetup),
 ]);

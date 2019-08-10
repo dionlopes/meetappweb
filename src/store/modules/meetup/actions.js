@@ -11,6 +11,13 @@ export function shareMeetupSuccess(meetup, myMeetup) {
   };
 }
 
+export function newMeetupRequest(file_id, title, description, date, location) {
+  return {
+    type: '@meetup/NEW_MEETUP_REQUEST',
+    payload: { file_id, title, description, date, location },
+  };
+}
+
 export function deleteMeetupRequest(id) {
   return {
     type: '@meetup/DELETE_MEETUP_REQUEST',
