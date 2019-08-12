@@ -19,10 +19,12 @@ export const Content = styled.div`
 
   aside {
     display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
     align-items: center;
 
     button {
-      margin: 25px;
+      margin: 12px 0px 12px 12px;
       width: 71px;
       height: 42px;
       border-radius: 4px;

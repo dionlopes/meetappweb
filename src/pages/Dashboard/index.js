@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import {
   MdChevronLeft,
@@ -24,16 +25,20 @@ export default function Dashboard() {
 
   useEffect(() => {
     async function loadSchedule() {
-      const response = await api.get('organizing', { params: { page } });
+      try {
+        const response = await api.get('organizing', { params: { page } });
+        const data = await response.data.map(meetup => ({
+          ...meetup,
+          defaultData: meetup.date,
+          data: format(parseISO(meetup.date), "dd 'de' MMMM',' 'as' HH'h'", {
+            locale: pt,
+          }),
+        }));
 
-      const data = await response.data.map(meetup => ({
-        ...meetup,
-        defaultData: meetup.date,
-        data: format(parseISO(meetup.date), "dd 'de' MMMM',' 'as' HH'h'", {
-          locale: pt,
-        }),
-      }));
-      setMeetUps(data);
+        setMeetUps(data);
+      } catch (error) {
+        toast.error('Ops! erro ao carregar as meetups');
+      }
     }
     loadSchedule();
   }, [page]);
