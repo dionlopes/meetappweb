@@ -64,6 +64,9 @@ export const Container = styled.div`
         font-weight: 700;
       }
       span {
+        margin-left: 5px;
+        font-size: 14px;
+        font-weight: 300;
         color: #e5556e;
       }
       div#data {

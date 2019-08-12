@@ -89,8 +89,12 @@ export default function Dashboard() {
             <ul>
               {meetUps.map(event => (
                 <li key={event.id}>
-                  <strong>{event.title}</strong>
-                  <span>{event.past ? 'Esse meetup já aconteceu' : ''}</span>
+                  <strong>
+                    {event.title}{' '}
+                    <span>
+                      {event.past ? '(Esse meetup já aconteceu)' : ''}
+                    </span>
+                  </strong>
                   <div id="data">
                     <span>{event.data}</span>
                     <button
