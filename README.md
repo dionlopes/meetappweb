@@ -8,7 +8,7 @@
   <a href="#memo-license">License</a>
 </p>
 
-![App Screenshot](https://raw.githubusercontent.com/dionlopes/gobarberweb/master/public/gobarberweb.png)
+![App Screenshot](https://raw.githubusercontent.com/dionlopes/meetappweb/master/public/meetappweb.png)
 
 ## :rocket: Technologies
 
