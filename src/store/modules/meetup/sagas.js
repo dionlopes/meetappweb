@@ -34,7 +34,6 @@ export function* newMeetup({ payload }) {
 }
 
 export function* editMeetup({ payload }) {
-  console.tron.log(payload);
   try {
     const { id, file_id, title, description, date, location } = payload;
 

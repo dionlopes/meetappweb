@@ -63,6 +63,9 @@ export const Container = styled.div`
         font-size: 18px;
         font-weight: 700;
       }
+      span {
+        color: #e5556e;
+      }
       div#data {
         display: flex;
         justify-content: center;

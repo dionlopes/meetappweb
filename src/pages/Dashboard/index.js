@@ -10,7 +10,7 @@ import {
 } from 'react-icons/md';
 
 import pt from 'date-fns/locale/pt';
-import { format, parseISO } from 'date-fns';
+import { format, parseISO, isBefore } from 'date-fns';
 
 import api from '~/services/api';
 
@@ -30,7 +30,8 @@ export default function Dashboard() {
         const data = await response.data.map(meetup => ({
           ...meetup,
           defaultData: meetup.date,
-          data: format(parseISO(meetup.date), "dd 'de' MMMM',' 'as' HH'h'", {
+          past: isBefore(parseISO(meetup.date), new Date()),
+          data: format(parseISO(meetup.date), "dd 'de' MMMM',' 'às' HH'h'", {
             locale: pt,
           }),
         }));
@@ -89,6 +90,7 @@ export default function Dashboard() {
               {meetUps.map(event => (
                 <li key={event.id}>
                   <strong>{event.title}</strong>
+                  <span>{event.past ? 'Esse meetup já aconteceu' : ''}</span>
                   <div id="data">
                     <span>{event.data}</span>
                     <button
