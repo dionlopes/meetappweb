@@ -1,6 +1,5 @@
 import { persistStore } from 'redux-persist';
 import createSagaMiddleware from 'redux-saga';
-import api from '~/services/api';
 
 import createStore from './createStore';
 import persistReducers from './persistReducers';
@@ -19,8 +18,6 @@ const middlewares = [sagaMiddleware];
 
 const store = createStore(persistReducers(rootReducer), middlewares);
 const persistor = persistStore(store);
-
-api.registerInterceptWithStore(store);
 
 sagaMiddleware.run(rootSaga);
 
